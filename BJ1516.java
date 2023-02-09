@@ -25,16 +25,21 @@ public class BJ1516 {
             }
         }
         int[] result = new int[size + 1];
-        for(int i = 1; i < size + 1; i++) {
-            if(list[i] == 0 && !check[i]) {
-                check[i] = true;
-                result[i] = result[i] + time[i];
-                for(int j = 0; j < visitList[i].size(); j++) {
-                    result[visitList[i].get(j)] = Math.max(result[i], result[visitList[i].get(j)] + time[i]);
-                    list[visitList[i].get(j)]--;
+        int count = 0;
+        while(count != size) {
+            for(int i = 1; i < size + 1; i++) {
+                if(list[i] == 0 && !check[i]) {
+                    check[i] = true;
+                    result[i] = result[i] + time[i];
+                    count++;
+                    for(int j = 0; j < visitList[i].size(); j++) {
+                        result[visitList[i].get(j)] = Math.max(result[i], result[visitList[i].get(j)] + time[i]);
+                        list[visitList[i].get(j)]--;
+                    }
                 }
             }
         }
+
         for(int i = 1; i < size + 1; i++) {
             System.out.println(result[i]);
         }
